@@ -39,61 +39,50 @@ export function Footer() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-xl font-medium tracking-tight">Studio Avant</h3>
+            <h3 className="text-xl tracking-tight">CLAUDINEI SANTOS</h3>
             <p className="text-muted-foreground max-w-md">
-              An experimental design studio focused on creating unique digital experiences.
+              Design Specialist with over 20 Years crafting UX/UI for fintech and AI.
             </p>
           </motion.div>
           
           <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-xl font-medium tracking-tight">Contact</h3>
+            <h3 className="text-xl tracking-tight">CONTACT</h3>
             <ul className="space-y-2">
               <li>
-                <a href="mailto:hello@studioavant.com" className="text-muted-foreground hover:text-foreground transition-colors avant-link">
-                  hello@studioavant.com
+                <a href="mailto:claudineiramiro@gmail.com" className="text-muted-foreground hover:text-foreground transition-colors avant-link">
+                  claudineiramiro@gmail.com
                 </a>
               </li>
               <li>
-                <a href="tel:+1234567890" className="text-muted-foreground hover:text-foreground transition-colors avant-link">
-                  +1 (234) 567-890
+                <a href="tel:+5541991524276" className="text-muted-foreground hover:text-foreground transition-colors avant-link">
+                  +55 41 9 9152 4276
                 </a>
               </li>
             </ul>
           </motion.div>
           
           <motion.div variants={itemVariants} className="space-y-4">
-            <h3 className="text-xl font-medium tracking-tight">Socials</h3>
+            <h3 className="text-xl tracking-tight">SOCIALS</h3>
             <ul className="space-y-2">
               <li>
                 <a 
-                  href="https://instagram.com" 
+                  href="https://linkedin.com/in/nei-santos" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors group"
                 >
-                  <span className="avant-link">Instagram</span>
+                  <span className="avant-link">LINKEDIN</span>
                   <ArrowUpRight size={14} className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
                 </a>
               </li>
               <li>
                 <a 
-                  href="https://twitter.com" 
+                  href="https://behance.net/nei-santos" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors group"
                 >
-                  <span className="avant-link">Twitter</span>
-                  <ArrowUpRight size={14} className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://dribbble.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors group"
-                >
-                  <span className="avant-link">Dribbble</span>
+                  <span className="avant-link">BEHANCE</span>
                   <ArrowUpRight size={14} className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
                 </a>
               </li>
@@ -108,11 +97,11 @@ export function Footer() {
           transition={{ delay: 0.3, duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p>&copy; {currentYear} Studio Avant. All rights reserved.</p>
+          <p>&copy; {currentYear} CLAUDINEI SANTOS. All rights reserved.</p>
           <div className="flex items-center gap-6 mt-4 md:mt-0">
-            <Link to="/" className="hover:text-foreground transition-colors avant-link">Privacy</Link>
-            <Link to="/" className="hover:text-foreground transition-colors avant-link">Terms</Link>
-            <Link to="/" className="hover:text-foreground transition-colors avant-link">Sitemap</Link>
+            <Link to="/" className="hover:text-foreground transition-colors avant-link">HOME</Link>
+            <Link to="/work" className="hover:text-foreground transition-colors avant-link">WORK</Link>
+            <Link to="/contact" className="hover:text-foreground transition-colors avant-link">CONTACT</Link>
           </div>
         </motion.div>
       </div>

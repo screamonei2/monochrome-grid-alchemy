@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export function ContactSection() {
   return (
-    <section className="py-24 md:py-32">
+    <section className="py-24 md:py-32" id="contact">
       <div className="avant-container">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -25,11 +25,11 @@ export function ContactSection() {
             </h2>
             
             <a 
-              href="mailto:hello@studioavant.com" 
+              href="mailto:claudineiramiro@gmail.com" 
               className="inline-block text-xl md:text-2xl border-b-2 border-foreground pb-1 hover:opacity-70 transition-opacity duration-300 group"
             >
               <div className="flex items-center gap-2">
-                <span>hello@studioavant.com</span>
+                <span>claudineiramiro@gmail.com</span>
                 <ArrowUpRight size={20} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
               </div>
             </a>

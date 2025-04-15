@@ -19,7 +19,12 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center noise-bg">
+    <section className="relative min-h-screen flex flex-col justify-center noise-bg" id="home">
+      <div className="gradient-hero blur-[80px]">
+        <div className="gradient-top"></div>
+        <div className="gradient-bottom"></div>
+      </div>
+      
       <div className="avant-container">
         <motion.div
           initial={{ opacity: 0 }}
@@ -30,7 +35,7 @@ export function HeroSection() {
         >
           <div className="marquee-container">
             <div className="marquee-content text-[180px] md:text-[250px] font-medium tracking-tight opacity-[0.03] whitespace-nowrap">
-              STUDIO AVANT STUDIO AVANT&nbsp;
+              CLAUDINEI SANTOS CLAUDINEI SANTOS&nbsp;
             </div>
           </div>
         </motion.div>
@@ -46,8 +51,8 @@ export function HeroSection() {
             }}
             className="flex flex-wrap md:flex-nowrap items-start gap-4 md:gap-6"
           >
-            <h2 className="text-lg md:text-xl font-light md:leading-normal max-w-xs">
-              Crafting unique digital experiences that push the boundaries of design.
+            <h2 className="text-lg md:text-xl font-normal md:leading-normal max-w-xs">
+              PRODUCT DESIGN LEAD
             </h2>
             <div className="w-28 h-[1px] mt-3 bg-foreground/30"></div>
           </motion.div>
@@ -60,12 +65,25 @@ export function HeroSection() {
               delay: 0.7,
               ease: [0.22, 1, 0.36, 1]
             }}
-            className="text-5xl md:text-7xl lg:text-8xl font-medium mt-8 md:mt-16 tracking-tight max-w-5xl"
+            className="text-5xl md:text-7xl lg:text-8xl mt-8 md:mt-16 tracking-tight max-w-5xl"
           >
-            Experimental Design
-            <br />Studio Based in
-            <br />Stockholm
+            CLAUDINEI
+            <br />SANTOS
           </motion.h1>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ 
+              duration: 0.7, 
+              delay: 0.9,
+              ease: [0.22, 1, 0.36, 1]
+            }}
+            className="mt-8 text-lg md:text-xl max-w-xl"
+          >
+            Design Specialist with over 20 Years crafting UX/UI for fintech and AI, 
+            blending design and data visualization.
+          </motion.p>
           
           <motion.div 
             initial={{ opacity: 0, y: 30 }}

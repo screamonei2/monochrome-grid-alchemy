@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { Menu, X } from "lucide-react";
@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react";
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,6 +23,11 @@ export function Header() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -58,10 +64,10 @@ export function Header() {
   };
 
   const links = [
-    { text: "Home", path: "/" },
-    { text: "Work", path: "/work" },
-    { text: "About", path: "/" },
-    { text: "Contact", path: "/" },
+    { text: "HOME", path: "/" },
+    { text: "WORK", path: "/work" },
+    { text: "CONTACT", path: "/contact" },
+    { text: "CV", path: "/cv" },
   ];
 
   return (
@@ -69,7 +75,7 @@ export function Header() {
       <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'py-3 backdrop-blur-md bg-background/80' : 'py-6 bg-transparent'}`}>
         <div className="avant-container flex justify-between items-center">
           <Link to="/" className="font-medium text-xl tracking-tight z-50">
-            <span className="avant-link">Studio Avant</span>
+            <span className="avant-link">CLAUDINEI SANTOS</span>
           </Link>
           
           <div className="hidden md:flex items-center gap-8">
@@ -78,7 +84,7 @@ export function Header() {
                 <Link 
                   key={link.text} 
                   to={link.path}
-                  className="hover:opacity-70 transition-opacity duration-300 avant-link"
+                  className={`hover:opacity-70 transition-opacity duration-300 avant-link ${location.pathname === link.path ? 'font-medium' : ''}`}
                 >
                   {link.text}
                 </Link>
