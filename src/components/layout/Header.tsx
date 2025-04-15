@@ -74,12 +74,12 @@ export function Header() {
     <>
       <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'py-3 backdrop-blur-md bg-background/80' : 'py-6 bg-transparent'}`}>
         <div className="avant-container flex justify-between items-center">
-          <Link to="/" className="font-medium text-xl tracking-tight z-50">
-            <span className="avant-link">CLAUDINEI SANTOS</span>
+          <Link to="/" className="font-medium text-xl tracking-tight z-50 font-mono uppercase">
+            <span className="avant-link glitch-text-subtle">NS/ PD</span>
           </Link>
           
           <div className="hidden md:flex items-center gap-8">
-            <nav className="flex items-center gap-8">
+            <nav className="flex items-center gap-8 font-mono uppercase">
               {links.map((link) => (
                 <Link 
                   key={link.text} 
@@ -119,7 +119,7 @@ export function Header() {
             exit="closed"
             variants={menuVariants}
           >
-            <nav className="flex flex-col items-center gap-8 text-4xl font-light">
+            <nav className="flex flex-col items-center gap-8 text-4xl font-light font-mono uppercase">
               {links.map((link, i) => (
                 <motion.div
                   key={link.text}

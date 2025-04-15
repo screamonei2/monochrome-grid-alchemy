@@ -1,20 +1,39 @@
+
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDownRight } from "lucide-react";
 
-// Array of roles for the glitch animation
+// Expanded array of roles for the glitch animation
 const roles = [
   "PRODUCT DESIGN LEAD",
   "UX DESIGNER",
   "UI DESIGNER",
   "PRODUCT DESIGNER",
-  "DESIGN MANAGER"
+  "DESIGN MANAGER",
+  "RESEARCHER",
+  "DESIGN STRATEGIST",
+  "INFORMATION ARCHITECT",
+  "DATA VISUALIZER",
+  "DESIGN SYSTEMS ENGINEER"
+];
+
+// Array of font variations for name glitch
+const fontVariations = [
+  "font-mono",
+  "font-sans",
+  "font-serif",
+  "italic",
+  "font-bold",
+  "tracking-widest",
+  "tracking-tight"
 ];
 
 export function HeroSection() {
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [isGlitching, setIsGlitching] = useState(false);
   const [nameGlitch, setNameGlitch] = useState(false);
+  const [nameFontClass, setNameFontClass] = useState("font-mono");
+  const [nameDistortion, setNameDistortion] = useState("");
   
   const marqueeRef = useRef<HTMLDivElement>(null);
   
@@ -30,7 +49,7 @@ export function HeroSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Role glitch animation loop
+  // Enhanced Role glitch animation loop
   useEffect(() => {
     const glitchInterval = setInterval(() => {
       setIsGlitching(true);
@@ -42,13 +61,33 @@ export function HeroSection() {
           setIsGlitching(false);
         }, 300);
       }, 200);
-    }, 4000);
+    }, 3000);
     
-    // Name glitch animation at different intervals
+    // More aggressive name glitch animation at different intervals
     const nameGlitchInterval = setInterval(() => {
       setNameGlitch(true);
-      setTimeout(() => setNameGlitch(false), 300);
-    }, 7000);
+      // Randomly select a font variation
+      setNameFontClass(fontVariations[Math.floor(Math.random() * fontVariations.length)]);
+      
+      // Random distortion effect
+      const distortions = [
+        "NE1 S4NT0S",
+        "N3I S4NT0S",
+        "ИEI SAИТОS",
+        "N£I $ANT0$",
+        "NEI SANTOS",
+        "ИЭИ CAИTOC",
+        "N̷E̷I̷ ̷S̷A̷N̷T̷O̷S̷",
+        "N_E_I S-A-N-T-O-S"
+      ];
+      setNameDistortion(distortions[Math.floor(Math.random() * distortions.length)]);
+      
+      setTimeout(() => {
+        setNameGlitch(false);
+        setNameFontClass("font-mono");
+        setNameDistortion("");
+      }, 300);
+    }, 5000);
     
     return () => {
       clearInterval(glitchInterval);
@@ -58,7 +97,7 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center" id="home">
-      <div className="gradient-hero blur-[80px]">
+      <div className="gradient-hero blur-[120px]">
         <div className="gradient-top"></div>
         <div className="gradient-bottom"></div>
       </div>
@@ -77,7 +116,7 @@ export function HeroSection() {
           >
             <div className="text-lg md:text-xl font-normal md:leading-normal max-w-xs relative overflow-hidden">
               <div 
-                className={`${isGlitching ? 'glitch-text' : 'transition-all duration-300'}`}
+                className={`${isGlitching ? 'glitch-text-intense' : 'transition-all duration-300'}`}
                 aria-label={roles[currentRoleIndex]}
               >
                 {roles[currentRoleIndex]}
@@ -94,10 +133,9 @@ export function HeroSection() {
               delay: 0.7,
               ease: [0.22, 1, 0.36, 1]
             }}
-            className={`text-5xl md:text-7xl lg:text-8xl mt-8 md:mt-16 tracking-tight max-w-5xl ${nameGlitch ? 'name-glitch' : ''}`}
+            className={`text-5xl md:text-7xl lg:text-8xl mt-8 md:mt-16 tracking-tight max-w-5xl ${nameGlitch ? 'name-glitch-intense ' + nameFontClass : ''}`}
           >
-            CLAUDINEI
-            <br />SANTOS
+            {nameGlitch && nameDistortion ? nameDistortion : "NEI\nSANTOS"}
           </motion.h1>
           
           <motion.p
