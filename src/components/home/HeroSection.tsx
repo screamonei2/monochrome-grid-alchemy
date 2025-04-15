@@ -1,9 +1,21 @@
-
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowDownRight } from "lucide-react";
 
+// Array of roles for the glitch animation
+const roles = [
+  "PRODUCT DESIGN LEAD",
+  "UX DESIGNER",
+  "UI DESIGNER",
+  "PRODUCT DESIGNER",
+  "DESIGN MANAGER"
+];
+
 export function HeroSection() {
+  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  const [isGlitching, setIsGlitching] = useState(false);
+  const [nameGlitch, setNameGlitch] = useState(false);
+  
   const marqueeRef = useRef<HTMLDivElement>(null);
   
   // Parallax effect on scroll
@@ -18,28 +30,40 @@ export function HeroSection() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Role glitch animation loop
+  useEffect(() => {
+    const glitchInterval = setInterval(() => {
+      setIsGlitching(true);
+      
+      setTimeout(() => {
+        setCurrentRoleIndex((prevIndex) => (prevIndex + 1) % roles.length);
+        
+        setTimeout(() => {
+          setIsGlitching(false);
+        }, 300);
+      }, 200);
+    }, 4000);
+    
+    // Name glitch animation at different intervals
+    const nameGlitchInterval = setInterval(() => {
+      setNameGlitch(true);
+      setTimeout(() => setNameGlitch(false), 300);
+    }, 7000);
+    
+    return () => {
+      clearInterval(glitchInterval);
+      clearInterval(nameGlitchInterval);
+    };
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex flex-col justify-center noise-bg" id="home">
+    <section className="relative min-h-screen flex flex-col justify-center" id="home">
       <div className="gradient-hero blur-[80px]">
         <div className="gradient-top"></div>
         <div className="gradient-bottom"></div>
       </div>
       
       <div className="avant-container">
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="absolute top-0 left-0 right-0 pt-36 md:pt-40 overflow-hidden"
-          ref={marqueeRef}
-        >
-          <div className="marquee-container">
-            <div className="marquee-content text-[180px] md:text-[250px] font-medium tracking-tight opacity-[0.03] whitespace-nowrap">
-              CLAUDINEI SANTOS CLAUDINEI SANTOS&nbsp;
-            </div>
-          </div>
-        </motion.div>
-        
         <div className="relative z-10 pt-40 md:pt-0">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -51,9 +75,14 @@ export function HeroSection() {
             }}
             className="flex flex-wrap md:flex-nowrap items-start gap-4 md:gap-6"
           >
-            <h2 className="text-lg md:text-xl font-normal md:leading-normal max-w-xs">
-              PRODUCT DESIGN LEAD
-            </h2>
+            <div className="text-lg md:text-xl font-normal md:leading-normal max-w-xs relative overflow-hidden">
+              <div 
+                className={`${isGlitching ? 'glitch-text' : 'transition-all duration-300'}`}
+                aria-label={roles[currentRoleIndex]}
+              >
+                {roles[currentRoleIndex]}
+              </div>
+            </div>
             <div className="w-28 h-[1px] mt-3 bg-foreground/30"></div>
           </motion.div>
           
@@ -65,7 +94,7 @@ export function HeroSection() {
               delay: 0.7,
               ease: [0.22, 1, 0.36, 1]
             }}
-            className="text-5xl md:text-7xl lg:text-8xl mt-8 md:mt-16 tracking-tight max-w-5xl"
+            className={`text-5xl md:text-7xl lg:text-8xl mt-8 md:mt-16 tracking-tight max-w-5xl ${nameGlitch ? 'name-glitch' : ''}`}
           >
             CLAUDINEI
             <br />SANTOS
