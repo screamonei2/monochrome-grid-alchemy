@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { Menu, X } from "lucide-react";
 
 export function Header() {
@@ -66,8 +65,8 @@ export function Header() {
   const links = [
     { text: "HOME", path: "/" },
     { text: "WORK", path: "/work" },
-    { text: "CONTACT", path: "/contact" },
     { text: "CV", path: "/cv" },
+    { text: "LET'S TALK!", path: "/contact" },
   ];
 
   return (
@@ -90,11 +89,9 @@ export function Header() {
                 </Link>
               ))}
             </nav>
-            <ThemeSwitcher />
           </div>
           
           <div className="md:hidden flex items-center gap-4 z-50">
-            <ThemeSwitcher />
             <button 
               className="p-1" 
               onClick={toggleMenu}

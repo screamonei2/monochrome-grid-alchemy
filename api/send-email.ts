@@ -1,0 +1,59 @@
+import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { Resend } from 'resend';
+
+// Ensure you have RESEND_API_KEY in your environment variables
+const resend = new Resend(process.env.RESEND_API_KEY);
+const recipientEmail = 'claudineiramiro@gmail.com'; // Your email address
+
+export default async function handler(
+  request: VercelRequest,
+  response: VercelResponse,
+) {
+  if (request.method !== 'POST') {
+    return response.status(405).json({ message: 'Method Not Allowed' });
+  }
+
+  try {
+    const { name, email, subject, otherSubject, message } = request.body;
+
+    if (!name || !email || !subject || !message) {
+      return response.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Construct the final subject line
+    const finalSubject = subject === 'Other' && otherSubject
+      ? `[Contato Portfolio] ${otherSubject}`
+      : `[Contato Portfolio] ${subject}`;
+
+    // Construct the email body
+    const emailBody = `
+      Nome: ${name}
+      Email: ${email}
+      Assunto: ${subject === 'Other' && otherSubject ? otherSubject : subject}
+      --------------------
+      Mensagem:
+      ${message}
+    `;
+
+    const { data, error } = await resend.emails.send({
+      from: 'Portfolio Contact <onboarding@resend.dev>', // Replace with your verified Resend domain/email if available, otherwise use this default for testing
+      to: [recipientEmail],
+      subject: finalSubject,
+      text: emailBody,
+      reply_to: email, // Set the sender's email as the reply-to address
+    });
+
+    if (error) {
+      console.error('Resend Error:', error);
+      return response.status(500).json({ message: 'Failed to send email', error: error.message });
+    }
+
+    console.log('Email sent successfully:', data);
+    return response.status(200).json({ message: 'Email sent successfully' });
+
+  } catch (error) {
+    console.error('Server Error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Internal Server Error';
+    return response.status(500).json({ message: 'Internal Server Error', error: errorMessage });
+  }
+}

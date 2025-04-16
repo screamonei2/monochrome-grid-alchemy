@@ -41,7 +41,7 @@ export function Footer() {
           <motion.div variants={itemVariants} className="space-y-4">
             <h3 className="text-xl tracking-tight">CLAUDINEI SANTOS</h3>
             <p className="text-muted-foreground max-w-md">
-              Design Specialist with over 20 Years crafting UX/UI for fintech and AI.
+              20 years making some good stuff!
             </p>
           </motion.div>
           
@@ -51,11 +51,6 @@ export function Footer() {
               <li>
                 <a href="mailto:claudineiramiro@gmail.com" className="text-muted-foreground hover:text-foreground transition-colors avant-link">
                   claudineiramiro@gmail.com
-                </a>
-              </li>
-              <li>
-                <a href="tel:+5541991524276" className="text-muted-foreground hover:text-foreground transition-colors avant-link">
-                  +55 41 9 9152 4276
                 </a>
               </li>
             </ul>
@@ -97,11 +92,12 @@ export function Footer() {
           transition={{ delay: 0.3, duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p>&copy; {currentYear} CLAUDINEI SANTOS. All rights reserved.</p>
+          <p>&copy; {currentYear} NS/ PD. All rights reserved.</p>
           <div className="flex items-center gap-6 mt-4 md:mt-0">
             <Link to="/" className="hover:text-foreground transition-colors avant-link">HOME</Link>
             <Link to="/work" className="hover:text-foreground transition-colors avant-link">WORK</Link>
-            <Link to="/contact" className="hover:text-foreground transition-colors avant-link">CONTACT</Link>
+            <Link to="/cv" className="hover:text-foreground transition-colors avant-link">CV</Link>
+            <Link to="/contact" className="hover:text-foreground transition-colors avant-link">LET'S TALK!</Link>
           </div>
         </motion.div>
       </div>

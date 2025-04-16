@@ -24,25 +24,32 @@ export function FeaturedWork() {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Monochrome Elegance",
-      category: "UI Design / Development",
-      image: "https://images.unsplash.com/photo-1488972685288-c3fd157d7c7a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      year: "2024"
+      title: "Global Forest Watch Pro, a WRI Product",
+      category: "UX Research / Product Design",
+      image: "../world-resources-institute-global-forest-watch-pro.png",
+      year: "2022 - 2024"
     },
     {
       id: 2,
-      title: "Architectural Perspectives",
-      category: "Brand Identity / Web Design",
-      image: "https://images.unsplash.com/photo-1527576539890-dfa815648363?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
-      year: "2023"
-    },
+      title: "Antecipag, a Finnet Product",
+      category: "UX Research / Team Leadership",
+      image: "../finnet-antecipag.png",
+      year: "2020 - 2021"
+    }/* ,
     {
       id: 3,
-      title: "Minimalist Contrast",
-      category: "Art Direction / Photography",
-      image: "https://images.unsplash.com/photo-1452960962994-acf4fd70b632?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
-      year: "2023"
-    }
+      title: "Allegiant, a Free Font by Nei Santos",
+      category: "Art Direction / Font Design",
+      image: "../allegiant-a-free-font-by-nei-santos.png",
+      year: "2018"
+    },
+    {
+      id: 4,
+      title: "GraphixTV, Brand Study Case",
+      category: "Art Direction / Brand Identity",
+      image: "../graphixtv-brand-study-case.png",
+      year: "2017"
+    } */
   ];
 
   return (

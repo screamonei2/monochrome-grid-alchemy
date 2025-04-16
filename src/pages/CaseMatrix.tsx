@@ -17,6 +17,13 @@ interface Project {
   methodologies?: string[];
 }
 
+interface GalleryItem {
+  id: string;
+  title: string;
+  category: string;
+  image: string;
+}
+
 const CaseMatrix = () => {
   const [selectedMethodologies, setSelectedMethodologies] = useState<string[]>([]);
   const [filteredProjects, setFilteredProjects] = useState<Project[]>([]);
@@ -24,23 +31,23 @@ const CaseMatrix = () => {
   const projects: Project[] = [
     {
       id: "wri",
-      title: "Global Forest Watch Redesign",
+      title: "Global Forest Watch Pro",
       client: "World Resources Institute",
       category: "UI Design / Data Visualization",
-      image: "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80",
+      image: "../world-resources-institute-global-forest-watch-pro.png",
       year: "2022-2024",
       featured: true,
-      methodologies: ["User-Centered Design", "Design Thinking", "Data Visualization"]
+      methodologies: ["User-Centered Design", "Design Thinking", "Data Visualization", "Design Sprint"]
     },
     {
       id: "klabin",
-      title: "Loss Management Interface",
+      title: "Design Thinking Workshop",
       client: "Klabin",
-      category: "UX Research / UI Design",
-      image: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80",
+      category: "UX Research / Design Thinking",
+      image: "../klabin-design-thinking-sao-paulo.png",
       year: "2021-2022",
-      featured: true,
-      methodologies: ["Lean UX", "User Testing", "Design Sprint"]
+      featured: false,
+      methodologies: ["User Testing", "Design Thinking"]
     },
     {
       id: "ambev",
@@ -49,18 +56,41 @@ const CaseMatrix = () => {
       category: "AI Design / Mobile UX",
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80",
       year: "2021",
-      featured: true,
+      featured: false,
       methodologies: ["Design Sprint", "AI Workflow Design", "Rapid Prototyping"]
     },
     {
       id: "finnet",
-      title: "Payment System Redesign",
+      title: "Antecipag",
       client: "Finnet",
-      category: "Fintech / UX Design",
-      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+      category: "UX Research / Team Leadership",
+      image: "../finnet-antecipag.png",
       year: "2020-2021",
-      methodologies: ["Design Systems", "Financial UX", "User Research"]
+      featured: true,
+      methodologies: ["Design Systems", "Fintech Design", "Team Leadership"]
     }
+  ];
+
+  const galleryItems: GalleryItem[] = [
+    {
+      id: "gallery-1",
+      title: "GraphixTV Brand Study",
+      category: "Branding / UI Design",
+      image: "../graphixtv-brand-study-case.png"
+    },
+    {
+      id: "gallery-2",
+      title: "Allegiant Font",
+      category: "Typography / Font Design",
+      image: "../allegiant-a-free-font-by-nei-santos.png"
+    },
+    {
+      id: "gallery-3",
+      title: "Washington DC Trip",
+      category: "Photography",
+      image: "../washington-dc.jpg"
+    },
+    // Add more gallery items here if needed
   ];
 
   const methodologies = [
@@ -74,7 +104,8 @@ const CaseMatrix = () => {
     "User Research",
     "User Testing",
     "Design Systems",
-    "Financial UX"
+    "Fintech Design",
+    "Team Leadership",
   ];
   
   // Filter projects based on selected methodologies
@@ -201,7 +232,7 @@ const CaseMatrix = () => {
                 variants={staggerVariants}
                 initial="hidden"
                 animate="visible"
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
               >
                 {filteredProjects.filter(p => p.featured).map((project) => (
                   <motion.div
@@ -309,6 +340,44 @@ const CaseMatrix = () => {
               </motion.div>
             </div>
           )}
+
+          {/* Gallery Section Start */}
+          <div className="mt-20">
+            <h2 className="text-2xl mb-8">GALLERY</h2>
+            <motion.div 
+              variants={staggerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+            >
+              {galleryItems.map((item) => (
+                <motion.div
+                  key={item.id}
+                  variants={itemVariants}
+                  className="group block fancy-border"
+                >
+                  <div className="overflow-hidden">
+                    <div 
+                      className="aspect-[4/3] bg-muted flex items-center justify-center overflow-hidden"
+                    >
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        style={{ filter: 'grayscale(100%)' }}
+                      />
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xl mb-1">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.category}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+          {/* Gallery Section End */}
           
           <motion.div 
             className="mt-24 md:mt-32 text-center"

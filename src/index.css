@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 /* Adding Geist fonts */
 @font-face {
@@ -203,6 +203,22 @@
   .gradient-bottom {
     height: 50%;
     background: conic-gradient(from 0deg at 99% 60% in lab, rgb(255, 255, 255) 0deg, rgba(17, 17, 17, 0) 18deg, rgba(17, 17, 17, 0) 270deg, rgb(255, 255, 255) 324deg, rgb(255, 255, 255) 342deg);
+  }
+
+  /* Success State - Green Gradient */
+  .gradient-hero.success .gradient-top {
+    background: conic-gradient(from 180deg at 99% 40% in lab, rgb(134, 239, 172) 18deg, rgb(74, 222, 128) 36deg, rgba(17, 17, 17, 0) 90deg, rgba(17, 17, 17, 0) 342deg, rgb(134, 239, 172) 360deg); /* Adjusted green colors */
+  }
+  .gradient-hero.success .gradient-bottom {
+    background: conic-gradient(from 0deg at 99% 60% in lab, rgb(134, 239, 172) 0deg, rgba(17, 17, 17, 0) 18deg, rgba(17, 17, 17, 0) 270deg, rgb(74, 222, 128) 324deg, rgb(134, 239, 172) 342deg); /* Adjusted green colors */
+  }
+
+  /* Error State - Red Gradient */
+  .gradient-hero.error .gradient-top {
+    background: conic-gradient(from 180deg at 99% 40% in lab, rgb(252, 165, 165) 18deg, rgb(248, 113, 113) 36deg, rgba(17, 17, 17, 0) 90deg, rgba(17, 17, 17, 0) 342deg, rgb(252, 165, 165) 360deg); /* Adjusted red colors */
+  }
+  .gradient-hero.error .gradient-bottom {
+    background: conic-gradient(from 0deg at 99% 60% in lab, rgb(252, 165, 165) 0deg, rgba(17, 17, 17, 0) 18deg, rgba(17, 17, 17, 0) 270deg, rgb(248, 113, 113) 324deg, rgb(252, 165, 165) 342deg); /* Adjusted red colors */
   }
   
   .fancy-border {

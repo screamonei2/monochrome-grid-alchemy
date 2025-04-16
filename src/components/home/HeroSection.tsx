@@ -148,8 +148,7 @@ export function HeroSection() {
             }}
             className="mt-8 text-lg md:text-xl max-w-xl"
           >
-            Design Specialist with over 20 Years crafting UX/UI for fintech and AI, 
-            blending design and data visualization.
+            Product designer with over 20 years making some good stuff, <br /> I create user-centered designs, and specialize in design systems, UX/UI design, and product strategy that solve real problems.
           </motion.p>
           
           <motion.div 
@@ -179,9 +178,9 @@ export function HeroSection() {
         transition={{ duration: 0.8, delay: 1.3 }}
         className="absolute bottom-12 left-0 right-0 flex justify-center"
       >
-        <div className="w-8 h-8 rounded-full border border-foreground/20 flex items-center justify-center animate-pulse">
+        <a href="#work" className="w-8 h-8 rounded-full border border-foreground/20 flex items-center justify-center animate-pulse">
           <ArrowDownRight size={18} className="text-foreground/60" />
-        </div>
+        </a>
       </motion.div>
     </section>
   );
