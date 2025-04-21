@@ -8,35 +8,35 @@
 /* Adding Geist fonts */
 @font-face {
   font-family: 'Geist Sans';
-  src: url('https://cdn.jsdelivr.net/npm/geist-font@latest/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/Geist-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Geist Sans';
-  src: url('https://cdn.jsdelivr.net/npm/geist-font@latest/dist/fonts/geist-sans/Geist-Medium.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/Geist-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Geist Sans';
-  src: url('https://cdn.jsdelivr.net/npm/geist-font@latest/dist/fonts/geist-sans/Geist-Light.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/Geist-Light.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Geist Mono';
-  src: url('https://cdn.jsdelivr.net/npm/geist-font@latest/dist/fonts/geist-mono/Geist-Mono-Regular.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-mono/Geist-Mono-Regular.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Geist Mono';
-  src: url('https://cdn.jsdelivr.net/npm/geist-font@latest/dist/fonts/geist-mono/Geist-Mono-Medium.woff2') format('woff2');
+  src: url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-mono/Geist-Mono-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
 }

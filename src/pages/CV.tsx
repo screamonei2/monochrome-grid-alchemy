@@ -148,8 +148,10 @@ const CV = () => {
             </Link>
             
             <a 
-              href="#" 
-              className="inline-flex items-center gap-2 border border-foreground px-4 py-2 rounded-full hover:bg-foreground hover:text-background transition-colors duration-300"
+              href="https://drive.google.com/drive/folders/1io7IbJ2rTb8NZN-TVnwY5l6zgQncwzb8?usp=sharing" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-foreground px-4 py-2 hover:bg-foreground hover:text-background transition-colors duration-300"
             >
               <Download size={16} />
               <span>Download CV</span>
@@ -168,10 +170,10 @@ const CV = () => {
             >
               <h1 className="text-5xl mb-6">CLAUDINEI SANTOS</h1>
               <h2 className="text-2xl mb-4">PRODUCT DESIGN LEAD</h2>
-              <p className="text-lg max-w-2xl">
-                Design Specialist with over 20 Years.
-                I craft UX/UI for fintech and AI, blending design and data visualization.
-                I lead agile teams, driving rapid iteration and modern branding in startups.
+              <p className="text-lg">
+                Design Specialist with over 20 Years. <br />
+                I craft UX/UI for fintech and AI, blending design and data visualization. <br />
+                I lead agile teams, driving rapid iteration and modern branding in startups. <br />
                 I design AI solutions and workflows, optimizing user research.
               </p>
             </motion.div>
@@ -230,7 +232,7 @@ const CV = () => {
                   <h3 className="text-xl mb-4">STRATEGY & LEADERSHIP</h3>
                   <div className="flex flex-wrap gap-2">
                     {skills.strategy.map((skill, index) => (
-                      <span key={index} className="px-3 py-1 border border-border rounded-full text-sm">
+                      <span key={index} className="px-3 py-1 border border-border text-sm">
                         {skill}
                       </span>
                     ))}
@@ -241,7 +243,7 @@ const CV = () => {
                   <h3 className="text-xl mb-4">TECHNICAL</h3>
                   <div className="flex flex-wrap gap-2">
                     {skills.technical.map((skill, index) => (
-                      <span key={index} className="px-3 py-1 border border-border rounded-full text-sm">
+                      <span key={index} className="px-3 py-1 border border-border text-sm">
                         {skill}
                       </span>
                     ))}
@@ -252,7 +254,7 @@ const CV = () => {
                   <h3 className="text-xl mb-4">TOOLS</h3>
                   <div className="flex flex-wrap gap-2">
                     {skills.tools.map((tool, index) => (
-                      <span key={index} className="px-3 py-1 border border-border rounded-full text-sm">
+                      <span key={index} className="px-3 py-1 border border-border text-sm">
                         {tool}
                       </span>
                     ))}

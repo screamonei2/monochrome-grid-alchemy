@@ -73,22 +73,22 @@ const CaseMatrix = () => {
 
   const galleryItems: GalleryItem[] = [
     {
-      id: "gallery-1",
-      title: "GraphixTV Brand Study",
-      category: "Branding / UI Design",
-      image: "../graphixtv-brand-study-case.png"
-    },
-    {
-      id: "gallery-2",
+      id: "allegiant",
       title: "Allegiant Font",
       category: "Typography / Font Design",
       image: "../allegiant-a-free-font-by-nei-santos.png"
     },
     {
-      id: "gallery-3",
-      title: "Washington DC Trip",
-      category: "Photography",
-      image: "../washington-dc.jpg"
+      id: "biggy",
+      title: "Biggy Font",
+      category: "Typography / Font Design",
+      image: "../biggy/thumb.jpg"
+    },
+    {
+      id: "graphixtv",
+      title: "GraphixTV",
+      category: "Branding",
+      image: "../graphixtv.png"
     },
     // Add more gallery items here if needed
   ];
@@ -212,7 +212,7 @@ const CaseMatrix = () => {
                   <button 
                     key={index}
                     onClick={() => toggleMethodology(methodology)}
-                    className={`px-3 py-1 text-xs border rounded-full transition-colors ${
+                    className={`px-3 py-1 text-xs border transition-colors ${
                       selectedMethodologies.includes(methodology) 
                         ? 'bg-foreground text-background border-foreground' 
                         : 'border-border hover:bg-accent'
@@ -227,7 +227,7 @@ const CaseMatrix = () => {
 
           {filteredProjects.filter(p => p.featured).length > 0 && (
             <div className="mb-20">
-              <h2 className="text-2xl mb-8">FEATURED PROJECTS</h2>
+              <h2 className="text-2xl mb-8">SELECTED CASES</h2>
               <motion.div 
                 variants={staggerVariants}
                 initial="hidden"
@@ -299,6 +299,7 @@ const CaseMatrix = () => {
             </div>
           )}
           
+          {/*
           {filteredProjects.length === 0 ? (
             <div className="py-20 text-center">
               <h3 className="text-xl mb-2">No projects match the selected filters</h3>
@@ -340,6 +341,7 @@ const CaseMatrix = () => {
               </motion.div>
             </div>
           )}
+          */}
 
           {/* Gallery Section Start */}
           <div className="mt-20">
@@ -357,22 +359,24 @@ const CaseMatrix = () => {
                   variants={itemVariants}
                   className="group block fancy-border"
                 >
-                  <div className="overflow-hidden">
-                    <div 
-                      className="aspect-[4/3] bg-muted flex items-center justify-center overflow-hidden"
-                    >
-                      <img 
-                        src={item.image} 
-                        alt={item.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        style={{ filter: 'grayscale(100%)' }}
-                      />
+                  <Link to={`/case/${item.id}`} className="block">
+                    <div className="overflow-hidden">
+                      <div 
+                        className="aspect-[4/3] bg-muted flex items-center justify-center overflow-hidden"
+                      >
+                        <img 
+                          src={item.image} 
+                          alt={item.title}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          style={{ filter: 'grayscale(100%)' }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-4">
-                    <h3 className="text-xl mb-1">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground">{item.category}</p>
-                  </div>
+                    <div className="p-4">
+                      <h3 className="text-xl mb-1">{item.title}</h3>
+                      <p className="text-sm text-muted-foreground">{item.category}</p>
+                    </div>
+                  </Link>
                 </motion.div>
               ))}
             </motion.div>

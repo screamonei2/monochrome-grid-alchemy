@@ -115,7 +115,7 @@ const Work = () => {
           </motion.div>
 
           <div className="mb-20">
-            <h2 className="text-2xl font-medium tracking-tight mb-8">Featured Projects</h2>
+            <h2 className="text-2xl font-medium tracking-tight mb-8">Cases</h2>
             <motion.div 
               variants={staggerVariants}
               initial="hidden"

@@ -178,7 +178,7 @@ export function HeroSection() {
         transition={{ duration: 0.8, delay: 1.3 }}
         className="absolute bottom-12 left-0 right-0 flex justify-center"
       >
-        <a href="#work" className="w-8 h-8 rounded-full border border-foreground/20 flex items-center justify-center animate-pulse">
+        <a href="#work" className="w-8 h-8 border border-foreground/20 flex items-center justify-center animate-pulse">
           <ArrowDownRight size={18} className="text-foreground/60" />
         </a>
       </motion.div>

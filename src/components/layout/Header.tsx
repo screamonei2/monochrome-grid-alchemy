@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -8,6 +8,7 @@ export function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +30,54 @@ export function Header() {
   }, [location.pathname]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  const handleBackToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setIsOpen(false); // Close mobile menu if open
+  };
+
+
+
+  // Refactored navigation logic to handle closing menu consistently
+  const navigateAndScroll = (targetId: string) => {
+    navigate("/");
+    const checkElementAfterNav = (retries = 10) => {
+      const elementAfterNavigation = document.getElementById(targetId);
+      if (elementAfterNavigation) {
+        elementAfterNavigation.scrollIntoView({ behavior: 'smooth' });
+        setIsOpen(false);
+      } else if (retries > 0) {
+        requestAnimationFrame(() => checkElementAfterNav(retries - 1));
+      } else {
+        console.error(`Element with ID "${targetId}" not found after navigating to homepage.`);
+        setIsOpen(false);
+      }
+    };
+    // Start checking after a short delay for navigation
+    setTimeout(() => requestAnimationFrame(() => checkElementAfterNav()), 100);
+  };
+
+  const handleHashLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault();
+    const targetId = hash.substring(1);
+    const targetElement = document.getElementById(targetId);
+
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const elementAfterNavigation = document.getElementById(targetId);
+        if (elementAfterNavigation) {
+          elementAfterNavigation.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    setIsOpen(false);
+  };
 
   const menuVariants = {
     closed: {
@@ -62,9 +111,10 @@ export function Header() {
     })
   };
 
-  const links = [
-    { text: "HOME", path: "/" },
+  const navLinks = [
+    // Home/Start/BackToTop is handled dynamically
     { text: "WORK", path: "/work" },
+    { text: "ABOUT ME", path: "#about" },
     { text: "CV", path: "/cv" },
     { text: "LET'S TALK!", path: "/contact" },
   ];
@@ -76,24 +126,54 @@ export function Header() {
           <Link to="/" className="font-medium text-xl tracking-tight z-50 font-mono uppercase">
             <span className="avant-link glitch-text-subtle">NS/ PD</span>
           </Link>
-          
+
           <div className="hidden md:flex items-center gap-8">
             <nav className="flex items-center gap-8 font-mono uppercase">
-              {links.map((link) => (
-                <Link 
-                  key={link.text} 
-                  to={link.path}
-                  className={`hover:opacity-70 transition-opacity duration-300 avant-link ${location.pathname === link.path ? 'font-medium' : ''}`}
+              {/* Dynamic First Link */}
+              {scrolled ? (
+                <a
+                  href="#top"
+                  onClick={handleBackToTop}
+                  className="hover:opacity-70 transition-opacity duration-300 avant-link"
                 >
-                  {link.text}
+                  BACK TO TOP
+                </a>
+              ) : (
+                <Link
+                  to="/"
+                  className={`hover:opacity-70 transition-opacity duration-300 avant-link ${location.pathname === '/' && !location.hash ? 'font-medium' : ''}`}
+                >
+                  START
                 </Link>
+              )}
+
+              {/* Other Links */}
+              {navLinks.map((link) => (
+                link.path.startsWith('#') ? (
+                  <a
+                    key={link.text}
+                    href={link.path}
+                    onClick={(e) => handleHashLinkClick(e, link.path)}
+                    className="hover:opacity-70 transition-opacity duration-300 avant-link"
+                  >
+                    {link.text}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.text}
+                    to={link.path}
+                    className={`hover:opacity-70 transition-opacity duration-300 avant-link ${location.pathname === link.path ? 'font-medium' : ''}`}
+                  >
+                    {link.text}
+                  </Link>
+                )
               ))}
             </nav>
           </div>
-          
+
           <div className="md:hidden flex items-center gap-4 z-50">
-            <button 
-              className="p-1" 
+            <button
+              className="p-1"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
@@ -117,22 +197,60 @@ export function Header() {
             variants={menuVariants}
           >
             <nav className="flex flex-col items-center gap-8 text-4xl font-light font-mono uppercase">
-              {links.map((link, i) => (
+              {/* Dynamic First Link - Mobile */}
+              <motion.div
+                custom={0} // Assign index 0
+                variants={linkVariants}
+                initial="closed"
+                animate="open"
+                exit="closed"
+              >
+                {scrolled ? (
+                  <a
+                    href="#top"
+                    className="avant-link py-2"
+                    onClick={handleBackToTop}
+                  >
+                    BACK TO TOP
+                  </a>
+                ) : (
+                  <Link
+                    to="/"
+                    className="avant-link py-2"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    START
+                  </Link>
+                )}
+              </motion.div>
+
+              {/* Other Links - Mobile */}
+              {navLinks.map((link, i) => (
                 <motion.div
                   key={link.text}
-                  custom={i}
+                  custom={i + 1}
                   variants={linkVariants}
                   initial="closed"
                   animate="open"
                   exit="closed"
                 >
-                  <Link 
-                    to={link.path}
-                    className="avant-link py-2"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {link.text}
-                  </Link>
+                  {link.path.startsWith('#') ? (
+                    <a
+                      href={link.path}
+                      className="avant-link py-2"
+                      onClick={(e) => handleHashLinkClick(e, link.path)}
+                    >
+                      {link.text}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.path}
+                      className="avant-link py-2"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {link.text}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
             </nav>

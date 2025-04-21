@@ -13,7 +13,7 @@ export function AboutSection() {
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
-    <section id="about" className="py-24 md:py-32 noise-bg" ref={containerRef}>
+    <section id="about" className="relative py-24 md:py-32 noise-bg" ref={containerRef}>
       <div className="avant-container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
           <motion.div 
@@ -90,6 +90,9 @@ export function AboutSection() {
               </p>
               <p className="text-muted-foreground text-lg">
                 With over 20 years as a Designer, and 10 years of experience in digital products, I lead cross-functional teams and help shape products for startups and large enterprises alike.
+              </p>
+              <p className="text-muted-foreground text-lg">
+                From Brazil, to the world!
               </p>
               
               <div className="grid grid-cols-2 gap-6 mt-10">

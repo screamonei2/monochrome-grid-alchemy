@@ -1,11 +1,41 @@
 
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleBackToTop = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleHashLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault();
+    const targetId = hash.substring(1); // Remove the '#'
+    const targetElement = document.getElementById(targetId);
+
+    if (location.pathname !== "/") {
+      // If not on the homepage, navigate first, then scroll
+      navigate("/");
+      // Use setTimeout to allow navigation to complete before scrolling
+      setTimeout(() => {
+        const elementAfterNavigation = document.getElementById(targetId);
+        if (elementAfterNavigation) {
+          elementAfterNavigation.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100); // Adjust delay if needed
+    } else {
+      // If already on the homepage, just scroll
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   const staggerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -93,9 +123,23 @@ export function Footer() {
           viewport={{ once: true }}
         >
           <p>&copy; {currentYear} NS/ PD. All rights reserved.</p>
-          <div className="flex items-center gap-6 mt-4 md:mt-0">
-            <Link to="/" className="hover:text-foreground transition-colors avant-link">HOME</Link>
+          <div className="flex items-center gap-6 mt-4 md:mt-0 font-mono uppercase">
+            <a
+              href="#top"
+              onClick={handleBackToTop}
+              className="hover:text-foreground transition-colors avant-link"
+            >
+              BACK TO TOP
+            </a>
+            {/* <Link to="/" className="hover:text-foreground transition-colors avant-link">HOME</Link> */}
             <Link to="/work" className="hover:text-foreground transition-colors avant-link">WORK</Link>
+            <a
+              href="#about"
+              onClick={(e) => handleHashLinkClick(e, '#about')}
+              className="hover:text-foreground transition-colors avant-link"
+            >
+              ABOUT ME
+            </a>
             <Link to="/cv" className="hover:text-foreground transition-colors avant-link">CV</Link>
             <Link to="/contact" className="hover:text-foreground transition-colors avant-link">LET'S TALK!</Link>
           </div>
