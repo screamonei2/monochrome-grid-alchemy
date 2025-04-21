@@ -40,7 +40,7 @@ export default async function handler(
       to: [recipientEmail],
       subject: finalSubject,
       text: emailBody,
-      reply_to: email, // Set the sender's email as the reply-to address
+      replyTo: email // Change from 'reply_to' to 'replyTo'
     });
 
     if (error) {
