@@ -45,7 +45,10 @@ export default async function handler(
 
     if (error) {
       console.error('Resend Error:', error);
-      return response.status(500).json({ message: 'Failed to send email', error: error.message });
+      return response.status(500).json({ 
+        message: 'Failed to send email', 
+        error: error.message || 'Unknown error'
+      });
     }
 
     console.log('Email sent successfully:', data);
@@ -54,6 +57,9 @@ export default async function handler(
   } catch (error) {
     console.error('Server Error:', error);
     const errorMessage = error instanceof Error ? error.message : 'Internal Server Error';
-    return response.status(500).json({ message: 'Internal Server Error', error: errorMessage });
+    return response.status(500).json({ 
+      message: 'Internal Server Error', 
+      error: errorMessage 
+    });
   }
 }
