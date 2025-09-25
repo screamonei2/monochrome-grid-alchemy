@@ -74,6 +74,19 @@ const CV = () => {
 
   const experience = [
     {
+      title: "Senior UX/UI Designer - Retail",
+      company: "Avenue Code",
+      location: "Blumenau, Santa Catarina, Brazil · Remote",
+      period: "Sep 2024 — Present",
+      description: "Leading grocery shopping experience design for marketplace platforms.",
+      accomplishments: [
+        "Shape seamless grocery shopping experiences with intuitive product discovery.",
+        "Turn complex requirements into clean designs for food marketplace platforms.",
+        "Work with product and engineering teams, aligning user needs with business.",
+        "Keep design standards evolving across premium food commerce touchpoints."
+      ]
+    },
+    {
       title: "Product Design Lead",
       company: "World Resources Institute",
       location: "Washington, DC, US",
