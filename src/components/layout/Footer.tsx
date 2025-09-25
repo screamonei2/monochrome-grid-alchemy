@@ -111,6 +111,17 @@ export function Footer() {
                   <ArrowUpRight size={14} className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
                 </a>
               </li>
+              <li>
+                <a 
+                  href="https://github.com/screamonei2" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 text-muted-foreground hover:text-foreground transition-colors group"
+                >
+                  <span className="avant-link">GITHUB</span>
+                  <ArrowUpRight size={14} className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
+                </a>
+              </li>
             </ul>
           </motion.div>
         </motion.div>

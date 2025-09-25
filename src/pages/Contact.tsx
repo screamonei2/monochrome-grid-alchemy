@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { ArrowUpRight, Copy, Check, MapPin, Mail, Phone, Linkedin } from "lucide-react";
+import { ArrowUpRight, Copy, Check, MapPin, Mail, Phone, Linkedin, Github } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Assuming basic input and textarea components are available or styled globally
@@ -187,6 +187,22 @@ ${formData.message}
                     </a>
                   </div>
                 </div>
+
+                <div className="flex items-start gap-4">
+                  <Github size={20} className="mt-1" />
+                  <div>
+                    <h3 className="text-sm text-muted-foreground mb-1">GITHUB</h3>
+                    <a
+                      href="https://github.com/screamonei2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center gap-1"
+                    >
+                      <span className="avant-link">github.com/screamonei2</span>
+                      <ArrowUpRight size={14} className="opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" />
+                    </a>
+                  </div>
+                </div>
               </motion.div>
 
               <motion.div
@@ -211,6 +227,14 @@ ${formData.message}
                     className="avant-link"
                   >
                     LINKEDIN
+                  </a>
+                  <a
+                    href="https://github.com/screamonei2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="avant-link"
+                  >
+                    GITHUB
                   </a>
                 </div>
               </motion.div>
