@@ -76,15 +76,40 @@ const Contact = () => {
         }),
       });
 
+      // Check if response is ok
       if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Failed to send message:', errorData.message || 'Unknown error');
+        let errorMessage = 'Unknown error occurred';
+        
+        try {
+          // Try to parse as JSON first
+          const errorData = await response.json();
+          errorMessage = errorData.message || errorData.error || errorMessage;
+        } catch (parseError) {
+          // If JSON parsing fails, try to get text
+          try {
+            const errorText = await response.text();
+            console.error('Non-JSON error response:', errorText);
+            errorMessage = 'Server error occurred. Please check your configuration.';
+          } catch (textError) {
+            console.error('Could not parse error response:', textError);
+            errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+          }
+        }
+        
+        console.error('Failed to send message:', errorMessage);
         setSubmissionStatus('error');
-        alert(`Error sending message: ${errorData.message || 'Please try again.'}`);
+        alert(`Error sending message: ${errorMessage}`);
         return;
       }
 
-      console.log('Form data submitted successfully');
+      // Try to parse successful response
+      try {
+        const result = await response.json();
+        console.log('Form data submitted successfully:', result);
+      } catch (parseError) {
+        console.log('Form data submitted successfully (non-JSON response)');
+      }
+      
       setIsSubmitted(true);
       setSubmissionStatus('success');
 

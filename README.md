@@ -60,6 +60,37 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Email Contact Form Configuration
+
+The contact form uses Resend for sending emails. To enable the contact form functionality:
+
+### 1. Get a Resend API Key
+- Visit [Resend](https://resend.com) and create an account
+- Go to API Keys section and create a new API key
+- Copy the API key (starts with `re_`)
+
+### 2. Configure Environment Variables
+
+**For Local Development:**
+Create a `.env.local` file in the project root:
+```
+RESEND_API_KEY=re_your_api_key_here
+```
+
+**For Production (Vercel):**
+1. Go to your Vercel dashboard
+2. Select your project
+3. Navigate to Settings > Environment Variables
+4. Add a new environment variable:
+   - Name: `RESEND_API_KEY`
+   - Value: Your Resend API key
+   - Environment: Production (and Preview if desired)
+
+### 3. Update Email Configuration
+Edit `api/send-email.ts` and update:
+- `recipientEmail`: Change to your email address
+- `from`: Update the sender email (must be verified in Resend)
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/a371003d-e34f-4586-9b37-5e73f529ded5) and click on Share -> Publish.

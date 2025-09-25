@@ -22,8 +22,18 @@ export default async function handler(
     return response.status(405).json({ message: 'Method Not Allowed' });
   }
 
+  // Check if Resend API key is configured
+  if (!process.env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY environment variable is not set');
+    return response.status(500).json({ 
+      message: 'Email service not configured', 
+      error: 'Missing API key' 
+    });
+  }
+
   try {
     const { name, email, subject, otherSubject, message } = request.body;
+    console.log('Received form data:', { name, email, subject, otherSubject: otherSubject ? '[provided]' : '[empty]', messageLength: message?.length });
 
     // Validate required fields
     if (!name || !email || !subject || !message) {
