@@ -76,9 +76,9 @@ const CV = () => {
     {
       title: "Senior UX/UI Designer - Retail",
       company: "Avenue Code",
-      location: "Blumenau, Santa Catarina, Brazil · Remote",
+      location: "San Francisco, CA, US",
       period: "Sep 2024 — Present",
-      description: "Leading grocery shopping experience design for marketplace platforms.",
+      description: "Leading software consultancy for enterprise digital transformation.",
       accomplishments: [
         "Shape seamless grocery shopping experiences with intuitive product discovery.",
         "Turn complex requirements into clean designs for food marketplace platforms.",
