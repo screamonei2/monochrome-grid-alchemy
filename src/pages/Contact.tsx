@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ArrowUpRight, Copy, Check, MapPin, Mail, Phone, Linkedin } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // Assuming basic input and textarea components are available or styled globally
 // If using a UI library like Shadcn UI, import Input, Select, Textarea, Button here
@@ -50,8 +51,18 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Reset status on new submission attempt if needed, or keep previous state visible
-    // setSubmissionStatus('idle'); 
+    
+    // Validate form data
+    if (!formData.name || !formData.email || !selectedSubject || !formData.message) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    
+    // If "Other" is selected, validate otherSubject
+    if (selectedSubject === 'Other' && !formData.otherSubject) {
+      alert('Please specify the subject when selecting "Other".');
+      return;
+    }
 
     try {
       const response = await fetch('/api/send-email', {
@@ -59,31 +70,27 @@ const Contact = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          subject: selectedSubject
+        }),
       });
 
       if (!response.ok) {
-        // Handle non-2xx responses
         const errorData = await response.json();
         console.error('Failed to send message:', errorData.message || 'Unknown error');
-        setIsSubmitted(false); // Keep form visible on error
-        setSubmissionStatus('error'); // Set error status for gradient
+        setSubmissionStatus('error');
         alert(`Error sending message: ${errorData.message || 'Please try again.'}`);
-        return; // Stop execution if there was an error
+        return;
       }
 
-      // Success - response is OK (e.g., 200)
       console.log('Form data submitted successfully');
-      setIsSubmitted(true); // Show success message UI
-      setSubmissionStatus('success'); // Set success status for gradient
-      // Optionally reset form after successful submission
-      // setFormData({ name: '', email: '', subject: '', otherSubject: '', message: '' });
-      // setSelectedSubject('');
+      setIsSubmitted(true);
+      setSubmissionStatus('success');
 
     } catch (error) {
       console.error('Error submitting form:', error);
-      setIsSubmitted(false); // Keep form visible on error
-      setSubmissionStatus('error'); // Set error status for gradient
+      setSubmissionStatus('error');
       alert('An error occurred while sending your message. Please try again later.');
     }
   };
@@ -241,9 +248,20 @@ const Contact = () => {
                   >
                     <Check size={48} className="mx-auto mb-4 text-foreground" />
                     <h3 className="text-2xl md:text-3xl mb-4">Thank You!</h3>
-                    <p className="text-lg max-w-md mx-auto">
+                    <p className="text-lg max-w-md mx-auto mb-6">
                       Your message has been sent successfully. I'll get back to you soon!
                     </p>
+                    <button
+                      onClick={() => {
+                        setIsSubmitted(false);
+                        setSubmissionStatus('idle');
+                        setFormData({ name: '', email: '', subject: '', otherSubject: '', message: '' });
+                        setSelectedSubject('');
+                      }}
+                      className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2"
+                    >
+                      Send Another Message
+                    </button>
                   </motion.div>
                 ) : (
                   <motion.form
@@ -252,13 +270,7 @@ const Contact = () => {
                     onSubmit={handleSubmit}
                     className="space-y-6 w-full"
                   >
-                    {isSubmitted ? (
-                      <div className="p-4 text-center bg-green-100 dark:bg-green-900 border border-green-300 dark:border-green-700 rounded-md text-green-800 dark:text-green-200">
-                        <Check className="inline-block w-6 h-6 mr-2" />
-                        Thank you! Your message has been sent successfully.
-                      </div>
-                    ) : (
-                      <>
+                    <>
                         {/* Name Input */}
                         <div className="relative">
                           <input
@@ -389,8 +401,7 @@ const Contact = () => {
                         >
                           Send Message
                         </button>
-                      </>
-                    )}
+                    </>
                   </motion.form>
                 )}
               </div>
@@ -402,7 +413,5 @@ const Contact = () => {
     </motion.div>
   );
 };
-
-import { cn } from "@/lib/utils"; // Ensure cn is imported if not already
 
 export default Contact;

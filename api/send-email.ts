@@ -9,6 +9,15 @@ export default async function handler(
   request: VercelRequest,
   response: VercelResponse,
 ) {
+  // Enable CORS
+  response.setHeader('Access-Control-Allow-Origin', '*');
+  response.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  if (request.method === 'OPTIONS') {
+    return response.status(200).end();
+  }
+
   if (request.method !== 'POST') {
     return response.status(405).json({ message: 'Method Not Allowed' });
   }
@@ -16,8 +25,15 @@ export default async function handler(
   try {
     const { name, email, subject, otherSubject, message } = request.body;
 
+    // Validate required fields
     if (!name || !email || !subject || !message) {
       return response.status(400).json({ message: 'Missing required fields' });
+    }
+
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return response.status(400).json({ message: 'Invalid email format' });
     }
 
     // Construct the final subject line
