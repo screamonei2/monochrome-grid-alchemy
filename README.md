@@ -60,36 +60,26 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
-## Email Contact Form Configuration
+## Contact Form
 
-The contact form uses Resend for sending emails. To enable the contact form functionality:
+The contact form uses a simple mailto approach that opens the user's default email client with a pre-filled message. This approach:
 
-### 1. Get a Resend API Key
-- Visit [Resend](https://resend.com) and create an account
-- Go to API Keys section and create a new API key
-- Copy the API key (starts with `re_`)
+- ✅ **No external dependencies** - Works without API keys or third-party services
+- ✅ **Always works** - No server configuration needed
+- ✅ **Privacy-friendly** - No data passes through external servers
+- ✅ **Simple setup** - Just update the email address in the code
 
-### 2. Configure Environment Variables
+### How it works:
+1. User fills out the form
+2. Form validates the input
+3. Opens default email client (Gmail, Outlook, etc.) with pre-filled message
+4. User clicks send in their email client
 
-**For Local Development:**
-Create a `.env.local` file in the project root:
+### To change the recipient email:
+Edit `src/pages/Contact.tsx` and update the email address in the `mailtoLink`:
+```typescript
+const mailtoLink = `mailto:YOUR_EMAIL@gmail.com?subject=${encodeURIComponent(finalSubject)}&body=${encodeURIComponent(emailBody)}`;
 ```
-RESEND_API_KEY=re_your_api_key_here
-```
-
-**For Production (Vercel):**
-1. Go to your Vercel dashboard
-2. Select your project
-3. Navigate to Settings > Environment Variables
-4. Add a new environment variable:
-   - Name: `RESEND_API_KEY`
-   - Value: Your Resend API key
-   - Environment: Production (and Preview if desired)
-
-### 3. Update Email Configuration
-Edit `api/send-email.ts` and update:
-- `recipientEmail`: Change to your email address
-- `from`: Update the sender email (must be verified in Resend)
 
 ## How can I deploy this project?
 

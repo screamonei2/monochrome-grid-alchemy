@@ -64,60 +64,29 @@ const Contact = () => {
       return;
     }
 
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ...formData,
-          subject: selectedSubject
-        }),
-      });
+    // Create email content
+    const finalSubject = selectedSubject === 'Other' && formData.otherSubject
+      ? `[Contato Portfolio] ${formData.otherSubject}`
+      : `[Contato Portfolio] ${selectedSubject}`;
 
-      // Check if response is ok
-      if (!response.ok) {
-        let errorMessage = 'Unknown error occurred';
-        
-        try {
-          // Try to parse as JSON first
-          const errorData = await response.json();
-          errorMessage = errorData.message || errorData.error || errorMessage;
-        } catch (parseError) {
-          // If JSON parsing fails, try to get text
-          try {
-            const errorText = await response.text();
-            console.error('Non-JSON error response:', errorText);
-            errorMessage = 'Server error occurred. Please check your configuration.';
-          } catch (textError) {
-            console.error('Could not parse error response:', textError);
-            errorMessage = `HTTP ${response.status}: ${response.statusText}`;
-          }
-        }
-        
-        console.error('Failed to send message:', errorMessage);
-        setSubmissionStatus('error');
-        alert(`Error sending message: ${errorMessage}`);
-        return;
-      }
+    const emailBody = `
+Nome: ${formData.name}
+Email: ${formData.email}
+Assunto: ${selectedSubject === 'Other' && formData.otherSubject ? formData.otherSubject : selectedSubject}
 
-      // Try to parse successful response
-      try {
-        const result = await response.json();
-        console.log('Form data submitted successfully:', result);
-      } catch (parseError) {
-        console.log('Form data submitted successfully (non-JSON response)');
-      }
-      
-      setIsSubmitted(true);
-      setSubmissionStatus('success');
+Mensagem:
+${formData.message}
+    `.trim();
 
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setSubmissionStatus('error');
-      alert('An error occurred while sending your message. Please try again later.');
-    }
+    // Create mailto link
+    const mailtoLink = `mailto:claudineiramiro@gmail.com?subject=${encodeURIComponent(finalSubject)}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Open default email client
+    window.location.href = mailtoLink;
+    
+    // Show success message
+    setIsSubmitted(true);
+    setSubmissionStatus('success');
   };
 
   const fadeInUpVariants = {
@@ -272,9 +241,10 @@ const Contact = () => {
                     className="text-center"
                   >
                     <Check size={48} className="mx-auto mb-4 text-foreground" />
-                    <h3 className="text-2xl md:text-3xl mb-4">Thank You!</h3>
+                    <h3 className="text-2xl md:text-3xl mb-4">Email Client Opened!</h3>
                     <p className="text-lg max-w-md mx-auto mb-6">
-                      Your message has been sent successfully. I'll get back to you soon!
+                      Your default email client should have opened with a pre-filled message. 
+                      Just click send to complete the process!
                     </p>
                     <button
                       onClick={() => {
